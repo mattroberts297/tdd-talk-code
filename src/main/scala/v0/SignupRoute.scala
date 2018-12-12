@@ -1,0 +1,36 @@
+package v0
+
+/**
+  * Type-Driven Development in Practice
+  *
+  * v0 -> No Free. No IO. No WriterT. No ReaderT.
+  *
+  * @author Matt Roberts
+  */
+
+// Type-driven development is a style of programming in
+// which we write types first and use those types to
+// guide the definition of functions. The overall
+// process is to write the necessary data types, and
+// then, for each function, do the following:
+//  1 Write the input and output types.
+//  2 Define the function, using the structure of the
+//    input types to guide the implementation.
+//  3 Refine and edit the type and function definition
+//    as necessary. (Brady, 2017)
+
+/**
+  * SignupRoute.scala
+  */
+object SignupRoute {
+  import akka.http.scaladsl.server.Directives._
+  import SignupInfra._
+
+  val route = (post & path("signup")) {
+    extractRequest { request =>
+      complete {
+        signup(request)
+      }
+    }
+  }
+}
